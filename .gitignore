@@ -1,0 +1,36 @@
+# dependencies
+/director/node_modules
+/frontend/node_modules
+/director/.pnp
+/director/.pnp.js
+
+/frontend/dist
+
+
+# testing
+/director/coverage
+/frontend/tests/e2e/videos/
+/frontend/tests/e2e/screenshots/
+
+# production
+/director/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
