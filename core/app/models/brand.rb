@@ -1,51 +1,56 @@
 class Brand < ManagingRecord
-  extend Images
-
-  has_one_attached :image
+  belongs_to :image, optional: true
   validates_presence_of :name
 
+  # DEPRECATED
   def image_url
-    if image.attached?
-      Rails.application.routes.url_for(
-        controller: 'active_storage/blobs', 
-        action: :show, 
-        signed_id: image.signed_id, 
-        filename: image.filename, 
-        host: 'localhost:3030'
-      )
+    picture_url
+  end
+
+  def picture_url
+    if self.image
+      image.url
     else
-      ''
-    end
+      ""
+    end 
   end
 
   # add image from base64 data format (with prefix)
-  def image=(data) 
-    puts "Brand.set_image"
-    result = Brand.from_base64(data, self.name)
-    image.attach(io: result[:io], filename: result[:filename])
+  def picture=(data) 
+    add_image = Image.create!(name: self.name, image: data)
+    # destroy prev image
+    self.image.destroy if self.image
+    self.image.delete if self.image
+    self.update(image: add_image)
   end
 
   def self.create!(params)
-    basic_params = params.except(:image)
+    basic_params = params.except(:picture)
     brand  = super basic_params
 
     # add an image to the brand
-    brand.image = params[:image] if params[:image]
+    brand.picture = params[:picture] if params[:picture]
     brand
   end
 
   def update(params)
-    puts "Brand.UPDATE"
-    basic_params = params.except(:image)
+    basic_params = params.except(:picture)
+
     super basic_params
-    if params[:image] == nil
-      # remove image
-      image.purge
-    elsif params[:image].slice(0,4) == 'data'
+    return {} if params[:image] != nil 
+
+    if params[:picture] == nil
+      self.image.delete() if self.image
+      self.image = nil
+    elsif params[:picture].slice(0,4) == 'data'
       # update the image
-      # image.purge
-      self.image = params[:image]
+      self.picture = params[:picture]
     end
+  end
+
+  def destroy
+    self.image.destroy
+    super
   end
 
 end

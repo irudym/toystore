@@ -9,12 +9,7 @@ import Header from './components/header';
 import AddButton from './components/add_button';
 import ErrorMessage from './containers/error_message';
 import RecordsHolder from './components/records_holder';
-import {
-  getColoursInfo,
-  postError,
-  recoverColour,
-  deleteColour,
-} from '../redux/actions';
+import { colours, postError } from '../redux/actions';
 import serverUrl from '../globals/api_server';
 import * as API from '../lib/api';
 
@@ -154,10 +149,10 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  getInfo: value => dispatch(getColoursInfo(value)),
+  getInfo: value => dispatch(colours.getInfo(value)),
   postError: value => dispatch(postError(value)),
-  deleteColour: value => dispatch(deleteColour(value)),
-  recoverColour: value => dispatch(recoverColour(value)),
+  deleteColour: value => dispatch(colours.delete(value)),
+  recoverColour: value => dispatch(colours.recover(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColoursTrash);

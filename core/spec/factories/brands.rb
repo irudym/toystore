@@ -9,6 +9,6 @@ FactoryBot.define do
     name { Faker::Color.color_name }
     name_eng {Faker::Color.color_name }
     description { Faker::Color.color_name }
-    image { "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" }
+    picture { "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" }
   end
 end

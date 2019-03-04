@@ -65,11 +65,13 @@ export const ACTION_TYPES = {
   DEAUTHORIZE: 'SYSTEM/DEAUTHORIZE',
   ERROR: 'SYSTEM/ERROR',
   RESET_ERROR: 'SYSTEM/RESET_ERROR',
+  SUCCESS: 'SYSTEM/SUCCESS',
   CATEGORIES: typesFor('categories'),
   COLOURS: typesFor('colours'),
   MATERIALS: typesFor('materials'),
   PRODUCTS: typesFor('products'),
   BRANDS: typesFor('brands'),
+  TYPES: typesFor('types'),
 };
 
 export const API_TYPES = {
@@ -78,5 +80,6 @@ export const API_TYPES = {
   MATERIALS: sagaTypesFor('materials'),
   PRODUCTS: sagaTypesFor('products'),
   BRANDS: sagaTypesFor('brands'),
+  TYPES: sagaTypesFor('types'),
   LOGIN_USER: 'API/LOGIN_USER',
 };

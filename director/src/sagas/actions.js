@@ -35,6 +35,8 @@ const categories = Records('categories');
 const colours = Records('colours');
 const materials = Records('materials');
 const brands = Records('brands');
+const types = Records('types');
+const products = Records('products');
 
 export function* loginUser(action) {
   try {
@@ -47,12 +49,16 @@ export function* loginUser(action) {
         authToken: data.auth_token,
       },
     });
+    yield put({
+      type: TYPES.SUCCESS,
+      payload: 'user logged in',
+    });
   } catch (error) {
     yield put({
       type: TYPES.ERROR,
       payload: { ...error },
     });
-    console.log(`ERROR: cannot authentificate the user: ${action.payload.user.email} due to error: ${error.message}`);
+    console.log(`ERROR: cannot authenticate the user: ${action.payload.user.email} due to error: ${error.message}`);
   }
 }
 
@@ -93,4 +99,6 @@ export default function* rootSaga() {
   yield modelActionMap(colours, 'colours').map(action => action.apply());
   yield modelActionMap(materials, 'materials').map(action => action.apply());
   yield modelActionMap(brands, 'brands').map(action => action.apply());
+  yield modelActionMap(types, 'types').map(action => action.apply());
+  yield modelActionMap(products, 'products').map(action => action.apply());
 }

@@ -13,7 +13,7 @@ class EditBrand extends React.Component {
     name: '',
     name_eng: '',
     description: '',
-    image: null,
+    picture: null,
     errors: {},
   }
 
@@ -39,7 +39,7 @@ class EditBrand extends React.Component {
     const { history, setBrand } = this.props;
 
     // clear Redux state record of the current Material
-    setBrand({ name: '', name_eng: '', description: '', id: -1, image: null });
+    setBrand({ name: '', name_eng: '', description: '', id: -1, picture: null });
     history.goBack();
   }
 
@@ -64,7 +64,7 @@ class EditBrand extends React.Component {
 
     this.setState({ errors: {} });
     const { auth: { token } } = this.props;
-    const { id, name, name_eng, description, image } = this.state;
+    const { id, name, name_eng, description, picture } = this.state;
 
     this.props.updateBrand({
       serverUrl,
@@ -74,7 +74,7 @@ class EditBrand extends React.Component {
         name,
         name_eng,
         description,
-        image,
+        picture,
       },
     });
 
@@ -87,7 +87,7 @@ class EditBrand extends React.Component {
 
   handleDescriptionChange = e => this.setState({ description: e.target.value });
 
-  handleImageChange = image => this.setState({ image });
+  handleImageChange = picture => this.setState({ picture });
 
   render() {
     const { loading, errors, name } = this.state;

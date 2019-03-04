@@ -58,7 +58,7 @@ const BrandView = ({
           value={brand.description}
         />
       </Form>
-      <ImagePicker onImageChange={onImageChange} image={brand.image} />
+      <ImagePicker onImageChange={onImageChange} image={brand.picture} />
     </ModalView.Content>
     <ModalView.Actions>
       <Button onClick={onSubmit}> Ok </Button>

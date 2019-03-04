@@ -29,6 +29,11 @@ const inputStyle = {
   position: 'absolute',
   overflow: 'hidden',
   zIndex: -1,
+  display: 'none',
+};
+
+const deleteIconStyle = {
+  cursor: 'pointer',
 };
 
 /**
@@ -38,6 +43,7 @@ const inputStyle = {
  * @param {func} onDelete - clear image handler
  * @param {bool} loading - show loading message
  * @param {func} setRef - set reference to input element to clear it
+ * @param {number} id - referenced id to distinguish
  */
 const ImagePicker = ({
   image,
@@ -45,10 +51,11 @@ const ImagePicker = ({
   onFileChange,
   setRef,
   loading,
+  id,
 }) => (
   <Card>
     <input
-      id="imageload"
+      id={`imageload-${id}`}
       type="file"
       accept="image/*"
       capture="camera"
@@ -58,13 +65,13 @@ const ImagePicker = ({
     />
     {image ? <Image src={image} />
       : (
-        <Card.Content>
-          {loading ? <div style={loadingStyle}>loading...</div> : <label htmlFor="imageload"><div style={addStyle}>+</div></label> }
+        <Card.Content style={{ overflow: 'hidden' }}>
+          {loading ? <div style={loadingStyle}>loading...</div> : <label htmlFor={`imageload-${id}`}><div style={addStyle}>+</div></label> }
         </Card.Content>
       )}
     {image ? (
       <Card.Content extra>
-        <Icon onClick={onDelete} name="trash" />
+        <Icon onClick={onDelete} name="trash" style={deleteIconStyle} />
       </Card.Content>
     ) : null
     }

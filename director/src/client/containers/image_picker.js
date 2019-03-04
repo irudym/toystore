@@ -14,10 +14,12 @@ class ImagePicker extends React.Component {
   static propTypes = {
     onImageChange: PropTypes.func.isRequired,
     image: PropTypes.string,
+    id: PropTypes.number,
   }
 
   static defaultProps = {
     image: null,
+    id: -100,
   }
 
   componentDidMount() {
@@ -61,6 +63,7 @@ class ImagePicker extends React.Component {
 
   render() {
     const { image, loading } = this.state;
+    const { id } = this.props;
     return (
       <ImagePickerComponent
         onFileChange={this.handleFileChange}
@@ -68,6 +71,7 @@ class ImagePicker extends React.Component {
         image={image}
         loading={loading}
         setRef={this.handleSetRef}
+        id={id}
       />
     );
   }

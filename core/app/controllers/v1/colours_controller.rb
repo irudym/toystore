@@ -1,5 +1,5 @@
 class V1::ColoursController < ApplicationController
-  # only admin has access to categories
+  # only admin has access to colours
   before_action :authenticate_admin
   before_action :set_color, only: [:show, :update, :destroy, :restore]
 

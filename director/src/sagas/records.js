@@ -30,6 +30,10 @@ export default function Records(model) {
           type: CREATE_ACTION_TYPE('set/by_page', model),
           payload: data,
         });
+        yield put({
+          type: TYPES.SUCCESS,
+          payload: 'record loaded by page',
+        });
       } catch (error) {
         yield put({
           type: TYPES.ERROR,

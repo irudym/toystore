@@ -16,7 +16,7 @@ Implementation of e-commerce store. Consist of three sub projects:
 
 #### Dependencies installation
 
-##### MariaDB
+##### MariaDB / MySQL
 
 At first install MariaDB, for MacOS the command are following (assuming using brew):
 ~~~
@@ -25,7 +25,7 @@ At first install MariaDB, for MacOS the command are following (assuming using br
   brew services start mariadb
 ~~~
 
-The latest command add mariadb server to auto-start.
+The last command add mariadb server to auto-start.
 After that install MariaDB client connector for linux:
 ~~~
   sudo apt-get install libmariadbd-dev

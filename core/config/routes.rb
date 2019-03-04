@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
   scope module: :v1 do
+    get 'types/pages/:id' => 'types#pages', defaults: { format: :json }
+    get 'types/trash' => 'types#trash', defaults: { format: :json }
+    get 'types/info' => 'types#info', defaults: { format: :json }
+    put 'types/trash/:id', to: 'types#restore', defaults: { format: :json }
+    resources :types, defaults: { format: :json }
+
     get 'categories/pages/:id' => 'categories#pages', defaults: { format: :json }
     get 'categories/trash' => 'categories#trash', defaults: { format: :json }
     get 'categories/info' => 'categories#info', defaults: { format: :json }

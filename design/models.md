@@ -24,30 +24,40 @@ Description of brands.
 * *name*
 * *name_eng*
 * *description*
+* image_id - (alias **picture**) - brand image
+
+#### Types 
+Different types of products. For example Toys could be musical, wooden, electronic, and so on
+* *name*
+* *name_eng*
+* *description* 
 
 #### Products
 Basic description of a product. The fields are following:
 * *name* - name in local language
 * *name_eng* - name in English
 * *description* - an item description
-* has_many: *materials* - a reference to materials
-* has_many: *colors*
-* belong_to: *category*
-* belong_to *brand*
-* has_many_attached: *images* - a reference to images
+* has_and_belongs_to_many: *materials* - a reference to materials
+* has_and_belongs_to_many: *colors* 
+* has_and_belongs_to_many: *types*
+* belong_to: *category* 
+* belong_to: *brand*
+* has_many_attached: *images* (alias **pictures**) - a reference to images
 
 Some items could have options to choose from. For example, different colours of the same product. Option selecting leads to choosing a separated object in **Stock**.
 
 #### Stock
 Describes the store stock, consist of available items which described by amount and price.
 * *product_id* - a reference to product model
+* belong_to: *colour* - in case there are many colour options in a related product
 * *amount* - quantity of the item
 * *price* - the price of the item
+* *reserve* - amount of reserved items
 * *in_price* - the purchasing price of the item (to calculate a margin)  
 
-#### Window
+#### Window/Shelf
 Products on the shopping window
 * *product_id*
 * *price* - can be different than Stock has
 * *discount*, default: 0 - current discount on the product
-* *current_image* - image which will be shown in product page
+* *current_image* - image which will be shown in product page (by default is the first image)

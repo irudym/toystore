@@ -8,7 +8,7 @@ RSpec.describe Brand, type: :model do
     should validate_presence_of(:name)
   }
 
-  it 'creates a brand without image' do
+  it 'creates a brand without picture' do
     brand = Brand.create!(name: 'test brand', name_eng: 'test brand', description: 'just a brand')
     expect(brand.name).to eq('test brand')
   end
@@ -18,9 +18,8 @@ RSpec.describe Brand, type: :model do
       name: 'test brand',
       name_eng: 'test brand',
       description: 'just a brand',
-      image: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+      picture: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
     )
-    expect(brand.image.attached?).to be_truthy
     expect(brand.image_url).not_to be_empty
   end
 
@@ -31,10 +30,9 @@ RSpec.describe Brand, type: :model do
       name: 'test brand',
       name_eng: 'test brand',
       description: 'just a brand',
-      image: image_url,
+      picture: image_url,
     }
     brand.update(params)
-    expect(brand.image.attached?).to be_truthy
     expect(brand.image_url).to eq(image_url)
   end
 
@@ -45,10 +43,9 @@ RSpec.describe Brand, type: :model do
       name: 'test brand',
       name_eng: 'test brand',
       description: 'just a brand',
-      image: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+      picture: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
     }
     brand.update(params)
-    expect(brand.image.attached?).to be_truthy
     expect(brand.image_url).not_to eq(image_url)
   end
 
@@ -58,11 +55,17 @@ RSpec.describe Brand, type: :model do
       name: 'test brand',
       name_eng: 'test brand',
       description: 'just a brand',
-      image: nil
+      picture: nil
     }
     brand.update(params)
-    expect(brand.image.attached?).to be_falsy
     expect(brand.image_url).to be_empty
+    expect(Image.all.length).to eq(2)
+  end
+
+  it 'destroys brand record and Image record' do
+    brands[2].destroy
+
+    expect(Image.all.length).to eq(2)
   end
 
 end

@@ -54,6 +54,6 @@ class V1::BrandsController < ApplicationController
 
   def brand_params
     # whitelist params
-    params.permit(:name, :name_eng, :description, :image)
+    params.permit(:name, :name_eng, :description, :picture)
   end
 end

@@ -118,6 +118,10 @@ const actionsFor = model => ({
 export const categories = actionsFor('categories');
 export const products = actionsFor('products');
 export const brands = actionsFor('brands');
+export const types = actionsFor('types');
+export const colours = actionsFor('colours');
+export const materials = actionsFor('materials');
+// TODO: refract code for colours and materials
 
 export const authorizeUser = value => (
   {
@@ -165,96 +169,13 @@ export const resetError = () => (
   }
 );
 
-
-export const createColour = value => (
+export const postSuccess = payload => (
   {
-    type: TYPES.COLOURS.CREATE,
-    payload: {
-      url: value.serverUrl,
-      token: value.token,
-      record: {
-        name: value.name,
-        name_eng: value.nameEng,
-        hex: value.hex,
-      },
-    },
+    type: TYPES.SUCCESS,
+    payload,
   }
 );
 
-export const fetchColoursByPage = value => (
-  {
-    type: TYPES.COLOURS.FETCH_BY_PAGE,
-    payload: {
-      url: value.serverUrl,
-      token: value.token,
-      page: value.page,
-    },
-  }
-);
-
-export const getColoursInfo = value => (
-  {
-    type: TYPES.COLOURS.GET_INFO,
-    payload: {
-      url: value.serverUrl,
-      token: value.token,
-    },
-  }
-);
-
-export const destroyColour = value => (
-  {
-    type: TYPES.COLOURS.DESTROY,
-    payload: {
-      url: value.serverUrl,
-      token: value.token,
-      id: value.id,
-    },
-  }
-);
-
-export const setColour = value => (
-  {
-    type: TYPES.COLOURS.SET_RECORD,
-    payload: value,
-  }
-);
-
-export const updateColour = value => (
-  {
-    type: TYPES.COLOURS.UPDATE,
-    payload: {
-      url: value.serverUrl,
-      token: value.token,
-      record: value.colour,
-    },
-  }
-);
-
-export const fetchColour = value => (
-  {
-    type: TYPES.COLOURS.FETCH_RECORD,
-    payload: {
-      url: value.serverUrl,
-      token: value.token,
-      id: value.id,
-    },
-  }
-);
-
-export const recoverColour = value => (
-  {
-    type: TYPES.COLOURS.RECOVER,
-    payload: value,
-  }
-);
-
-export const deleteColour = value => (
-  {
-    type: TYPES.COLOURS.DELETE,
-    payload: value,
-  }
-);
 
 export const fetchMaterialsByPage = value => (
   {

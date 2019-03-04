@@ -9,7 +9,7 @@ import Header from './components/header';
 import AddButton from './components/add_button';
 import ErrorMessage from './containers/error_message';
 
-import { fetchColoursByPage, getColoursInfo, destroyColour } from '../redux/actions';
+import { colours } from '../redux/actions';
 import serverUrl from '../globals/api_server';
 
 import RecordsHolder from './components/records_holder';
@@ -126,9 +126,9 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  fetchColours: value => dispatch(fetchColoursByPage(value)),
-  getInfo: value => dispatch(getColoursInfo(value)),
-  destroyColour: value => dispatch(destroyColour(value)),
+  fetchColours: value => dispatch(colours.fetchByPage(value)),
+  getInfo: value => dispatch(colours.getInfo(value)),
+  destroyColour: value => dispatch(colours.destroy(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Colours);

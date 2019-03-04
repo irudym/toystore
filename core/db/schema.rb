@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_05_063424) do
+ActiveRecord::Schema.define(version: 2019_02_19_201804) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_063424) do
     t.boolean "trash", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "image_id"
+    t.index ["image_id"], name: "index_brands_on_image_id"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
@@ -67,6 +69,26 @@ ActiveRecord::Schema.define(version: 2019_02_05_063424) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "colours_products", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+    t.integer "colour_id"
+    t.integer "product_id"
+    t.index ["colour_id"], name: "index_colours_products_on_colour_id"
+    t.index ["product_id"], name: "index_colours_products_on_product_id"
+  end
+
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "images_products", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+    t.integer "image_id"
+    t.integer "product_id"
+    t.index ["image_id"], name: "index_images_products_on_image_id"
+    t.index ["product_id"], name: "index_images_products_on_product_id"
+  end
+
   create_table "materials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "name"
     t.string "name_eng"
@@ -74,6 +96,13 @@ ActiveRecord::Schema.define(version: 2019_02_05_063424) do
     t.boolean "trash", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "materials_products", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+    t.integer "material_id"
+    t.integer "product_id"
+    t.index ["material_id"], name: "index_materials_products_on_material_id"
+    t.index ["product_id"], name: "index_materials_products_on_product_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
@@ -84,7 +113,25 @@ ActiveRecord::Schema.define(version: 2019_02_05_063424) do
     t.boolean "trash", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "brand_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "products_types", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+    t.integer "type_id"
+    t.integer "product_id"
+    t.index ["product_id"], name: "index_products_types_on_product_id"
+    t.index ["type_id"], name: "index_products_types_on_type_id"
+  end
+
+  create_table "types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+    t.string "name"
+    t.string "name_eng"
+    t.text "description"
+    t.boolean "trash", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
@@ -98,5 +145,6 @@ ActiveRecord::Schema.define(version: 2019_02_05_063424) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admins", "users"
+  add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
 end

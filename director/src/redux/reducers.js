@@ -34,6 +34,7 @@ const ACTION_HANDLERS = {
         ...state.errors,
       ],
       currentError: action.payload.message,
+      success: false,
     }
   ),
   [TYPES.RESET_ERROR]: (state, action) => (
@@ -42,12 +43,20 @@ const ACTION_HANDLERS = {
       currentError: null,
     }
   ),
+  [TYPES.SUCCESS]: (state, action) => (
+    {
+      ...state,
+      currentError: null,
+      success: true,
+    }
+  ),
 
   ...reducerForModel('categories'),
   ...reducerForModel('colours'),
   ...reducerForModel('materials'),
   ...reducerForModel('products'),
   ...reducerForModel('brands'),
+  ...reducerForModel('types'),
 };
 
 /**
@@ -76,6 +85,7 @@ export const initialState = {
   materials: modelState,
   products: modelState,
   brands: modelState,
+  types: modelState,
 };
 
 const directorReducer = (state = initialState, action) => {

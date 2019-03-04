@@ -34,6 +34,18 @@ const sideMenuItems = [
     link: '/director/brands',
     icon: 'eye',
   },
+  {
+    id: 105,
+    title: 'Types',
+    link: '/director/types',
+    icon: 'tag',
+  },
+  {
+    id: 106,
+    title: 'Products',
+    link: '/director/products',
+    icon: 'fly',
+  },
 ];
 
 const Director = () => (

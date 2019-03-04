@@ -43,7 +43,7 @@ class AddBrand extends React.Component {
 
     this.setState({ errors: {} });
     const { auth: { token }, createBrand } = this.props;
-    const { name, name_eng, description, image } = this.state;
+    const { name, name_eng, description, picture } = this.state;
 
     createBrand({
       serverUrl,
@@ -52,7 +52,7 @@ class AddBrand extends React.Component {
         name,
         name_eng,
         description,
-        image,
+        picture,
       },
     });
     this.handleClose();
@@ -64,7 +64,7 @@ class AddBrand extends React.Component {
 
   handleDescriptionChange = e => this.setState({ description: e.target.value });
 
-  handleImageChange = image => this.setState({ image });
+  handleImageChange = picture => this.setState({ picture });
 
   render() {
     const { loading, errors } = this.state;

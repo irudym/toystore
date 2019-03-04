@@ -28,3 +28,5 @@ export const colours = Colours;
 export const categories = Categories;
 export const materials = Materials;
 export const brands = Records('brands');
+export const types = Records('types');
+export const products = Records('products');

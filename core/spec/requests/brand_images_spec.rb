@@ -16,7 +16,7 @@ RSpec.describe 'Brands API Image support', type: :request do
     describe 'GET /brands/1 request' do
       before { get "/#{controller}/#{brand_id}", params: {}, headers: headers }
       it 'returns description of the brand' do
-        expect(json['image']).not_to be_empty
+        expect(json['picture']).not_to be_empty
       end
     end
   end

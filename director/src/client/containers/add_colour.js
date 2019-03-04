@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ColourView from '../components/views/colour_view';
-import { createColour } from '../../redux/actions';
+import { colours } from '../../redux/actions';
 import serverUrl from '../../globals/api_server';
 
 class AddColour extends React.Component {
@@ -49,10 +49,12 @@ class AddColour extends React.Component {
 
     this.props.createColour({
       serverUrl,
-      token,
-      name,
-      nameEng,
-      hex,
+      record: {
+        token,
+        name,
+        nameEng,
+        hex,
+      },
     });
     this.handleClose();
   }
@@ -93,7 +95,7 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  createColour: value => dispatch(createColour(value)),
+  createColour: value => dispatch(colours.create(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddColour);

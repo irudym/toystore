@@ -3,4 +3,5 @@ json.array! @brands do |brand|
   json.name brand.name
   json.name_eng brand.name_eng
   json.description brand.description
+  json.picture brand.picture_url
 end

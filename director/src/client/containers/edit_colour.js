@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ColourView from '../components/views/colour_view';
-import { fetchColour, setColour, updateColour } from '../../redux/actions';
+import { colours } from '../../redux/actions';
 import serverUrl from '../../globals/api_server';
 
 class EditColour extends React.Component {
@@ -76,7 +76,7 @@ class EditColour extends React.Component {
     update({
       serverUrl,
       token,
-      colour: {
+      record: {
         id,
         name,
         name_eng: nameEng,
@@ -132,9 +132,9 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  fetch: value => dispatch(fetchColour(value)),
-  set: value => dispatch(setColour(value)),
-  update: value => dispatch(updateColour(value)),
+  fetch: value => dispatch(colours.fetchRecord(value)),
+  set: value => dispatch(colours.setRecord(value)),
+  update: value => dispatch(colours.update(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditColour);
