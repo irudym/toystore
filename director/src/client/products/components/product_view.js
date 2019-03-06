@@ -5,7 +5,6 @@ import {
   Button,
   Message,
   Dropdown,
-  Label,
 } from 'semantic-ui-react';
 
 import ModalView from '../../components/views/modal_view';
@@ -17,7 +16,7 @@ const labelStyle = error => ({
   fontWeight: 700,
   color: error ? '#9f3a38' : 'black',
   padding: 0,
-  marginRight: '1rem',
+  margin: '0 0 .28571429rem 0',
 });
 
 
@@ -81,7 +80,7 @@ const ProductView = ({
           error={errors.Description !== undefined}
           value={product.description}
         />
-        <Form.Group inline>
+        <Form.Group style={{ display: 'block', margin: '0 0 1em' }}>
           <div style={labelStyle(errors.Brand !== undefined)}>Brand</div>
           <Dropdown
             placeholder="Select brand"
@@ -92,9 +91,10 @@ const ProductView = ({
             onChange={onBrandChange}
             defaultValue={product.brand}
             loading={optionLoading.brand}
+            error={errors.Brand !== undefined}
           />
         </Form.Group>
-        <Form.Group inline>
+        <Form.Group style={{ display: 'block', margin: '0 0 1em' }}>
           <div style={labelStyle(errors.Category !== undefined)}>Category</div>
           <Dropdown
             placeholder="Select category"
@@ -105,9 +105,10 @@ const ProductView = ({
             onChange={onCategoryChange}
             defaultValue={product.category}
             loading={optionLoading.category}
+            error={errors.Category !== undefined}
           />
         </Form.Group>
-        <Form.Group inline>
+        <Form.Group style={{ display: 'block', margin: '0 0 1em' }}>
           <div style={labelStyle(errors.Types !== undefined)}>Types</div>
           <Dropdown
             placeholder="Select category"
@@ -121,7 +122,7 @@ const ProductView = ({
             loading={optionLoading.types}
           />
         </Form.Group>
-        <Form.Group inline>
+        <Form.Group style={{ display: 'block', margin: '0 0 1em' }}>
           <div style={labelStyle(errors.Materials !== undefined)}>Materials</div>
           <Dropdown
             placeholder="Select category"
@@ -135,7 +136,7 @@ const ProductView = ({
             loading={optionLoading.materials}
           />
         </Form.Group>
-        <ColourDropdown loading={optionLoading.colours} options={colours} onChange={onColoursChange} error={errors.Colours !== undefined} />
+        <ColourDropdown defaultValue={product.colours} loading={optionLoading.colours} options={colours} onChange={onColoursChange} error={errors.Colours !== undefined} />
         <ImagePickerGroup onImageChange={onImageChange} images={pictures} error={errors.Pictures !== undefined} />
       </Form>
     </ModalView.Content>

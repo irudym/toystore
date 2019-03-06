@@ -1,4 +1,6 @@
 class Product < ManagingRecord
+  include Toids
+
   has_and_belongs_to_many :images
 
   belongs_to :category
@@ -7,14 +9,14 @@ class Product < ManagingRecord
   has_and_belongs_to_many :colours
   has_and_belongs_to_many :types 
 
-  validates_presence_of :name, :name_eng, :description
+  validates_presence_of :name, :name_eng, :description, :category, :brand
 
   def self.create_with_references!(params) 
     category = Category.find(params[:category])
     brand = Brand.find(params[:brand])
-    materials = Material.find(params[:materials])
-    colours = Colour.find(params[:colours])
-    types = Type.find(params[:types])
+    materials = Material.find(params[:materials]) if params[:materials]
+    colours = Colour.find(params[:colours]) if params[:colours]
+    types = Type.find(params[:types]) if params[:types]
 
     params[:category] = category
     params[:brand] = brand
@@ -52,16 +54,32 @@ class Product < ManagingRecord
   end
 
   def update(params)
-    basic_params = params.except(:pictures)
+    basic_params = params.except(:pictures,:types, :materials, :colours, :category, :brand)
+    basic_params[:category] = Category.find(params[:category]) if params[:category]
+    basic_params[:brand] = Brand.find(params[:brand]) if params[:brand]
+    basic_params[:types] = Type.find(params[:types]) if params[:types]
+    basic_params[:materials] = Material.find(params[:materials]) if params[:materials]
+    basic_params[:colours] = Colour.find(params[:colours]) if params[:colours]
     super basic_params
 
-    params[:pictures].each.with_index  do |image, index|
-      if image == nil
-        self.images.delete(self.images[index])
-      elsif image.slice(0,4) == 'data'
-        add_image(image, index)
+    puts "\n==============\mDEBUG: should update pictures: #{params[:pictures]}!\n=============\n"
+
+    update_pictures(params[:pictures]) if params[:pictures]
+  end
+
+  def update_pictures(pictures)
+    new_images = []
+    pictures.each.with_index do |image, index|
+      if image != 0 && image != nil
+        if image.slice(0,4) == 'data'
+          new_images << Image.create!(name: "#{self.name}-#{index}", image: image)
+        else
+          new_images << self.images[index]
+        end
       end
     end
+    # update list of images
+    self.images = new_images
   end
 
   def add_image(data, index)

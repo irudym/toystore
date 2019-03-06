@@ -31,7 +31,7 @@ const ImagePickerGroup = ({
         <Grid.Column width={4}>
           <ImagePicker
             key={index * 10}
-            image={images[index]}
+            image={images[2 * index]}
             onImageChange={img => onImageChange(img, 2 * index)}
             id={2 * index}
           />
@@ -39,7 +39,7 @@ const ImagePickerGroup = ({
         <Grid.Column width={4}>
           <ImagePicker
             key={index * 10 + 1}
-            image={images[index]}
+            image={images[2 * index + 1]}
             onImageChange={img => onImageChange(img, 2 * index + 1)}
             id={index * 10 + 1}
           />

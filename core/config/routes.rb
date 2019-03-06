@@ -31,6 +31,10 @@ Rails.application.routes.draw do
     put 'brands/trash/:id', to: 'brands#restore', defaults: { format: :json }
     resources :brands, defaults: { format: :json }
 
+    get 'products/pages/:id' => 'products#pages', defaults: { format: :json }
+    get 'products/trash' => 'products#trash', defaults: { format: :json }
+    get 'products/info' => 'products#info', defaults: { format: :json }
+    put 'products/trash/:id', to: 'products#restore', defaults: { format: :json }
     resources :products, defaults: { format: :json}
   end
 

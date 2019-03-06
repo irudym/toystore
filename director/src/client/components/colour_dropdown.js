@@ -69,7 +69,7 @@ ColourDropdown.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  defaultValue: PropTypes.object,
+  defaultValue: PropTypes.arrayOf(PropTypes.number),
   error: PropTypes.bool.isRequired,
 };
 

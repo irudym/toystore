@@ -28,6 +28,11 @@ class Products extends React.Component {
       title: 'English name',
       Component: RecordsHolder.Text,
     },
+    {
+      name: 'category',
+      title: 'Category',
+      Component: RecordsHolder.Text,
+    },
   ];
 
   componentDidMount() {
@@ -51,7 +56,7 @@ class Products extends React.Component {
     fetchProducts({ serverUrl, token, page: activePage });
   }
 
-  handleProductsDelete = (id) => {
+  handleProductDelete = (id) => {
     const { auth: { token }, destroyProduct } = this.props;
     destroyProduct({ serverUrl, token, id });
   }

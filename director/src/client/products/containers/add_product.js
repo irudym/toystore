@@ -22,8 +22,8 @@ class AddProduct extends React.Component {
     materials: [],
     colours: [],
     pictures: [],
-    brand: '',
-    category: '',
+    brand: null,
+    category: null,
     productTypes: [],
     productMaterials: [],
     productColours: [],
@@ -89,7 +89,7 @@ class AddProduct extends React.Component {
 
   validation = () => {
     let errors = {};
-    const { name, name_eng, description, pictures } = this.state;
+    const { name, name_eng, description, pictures, brand, category } = this.state;
     if (name.length === 0 || !name.trim()) {
       errors = { Name: 'Name field cannot be blank' };
     }
@@ -101,6 +101,12 @@ class AddProduct extends React.Component {
     }
     if (pictures.filter(Boolean).length === 0) {
       errors = { ...errors, Pictures: 'Product should have at least one picture' };
+    }
+    if (!brand) {
+      errors = { ...errors, Brand: 'Brand should be selected' };
+    }
+    if (!category) {
+      errors = { ...errors, Category: 'Category should be selected '};
     }
     return errors;
   }
