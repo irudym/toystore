@@ -37,7 +37,7 @@ class Brand < ManagingRecord
     basic_params = params.except(:picture)
 
     super basic_params
-    return {} if params[:image] != nil 
+    return {} if params[:picture] != nil 
 
     if params[:picture] == nil
       self.image.delete() if self.image
