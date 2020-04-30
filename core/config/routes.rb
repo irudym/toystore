@@ -35,7 +35,14 @@ Rails.application.routes.draw do
     get 'products/trash' => 'products#trash', defaults: { format: :json }
     get 'products/info' => 'products#info', defaults: { format: :json }
     put 'products/trash/:id', to: 'products#restore', defaults: { format: :json }
+    put 'products/search', to: 'products#search', defaults: { format: :json }
     resources :products, defaults: { format: :json}
+
+    get 'stock/pages/:id' => 'stock#pages', defaults: { format: :json }
+    get 'stock/trash' => 'stock#trash', defaults: { format: :json }
+    get 'stock/info' => 'stock#info', defaults: { format: :json }
+    put 'stock/trash/:id', to: 'stock#restore', defaults: { format: :json }
+    resources :stock, defaults: { format: :json}
   end
 
   post 'auth/login', to: 'authentication#authenticate'

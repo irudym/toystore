@@ -46,14 +46,17 @@ Basic description of a product. The fields are following:
 
 Some items could have options to choose from. For example, different colours of the same product. Option selecting leads to choosing a separated object in **Stock**.
 
-#### Stock
-Describes the store stock, consist of available items which described by amount and price.
+#### Item
+Describes the store items, represents available items which described by amount and price.
 * *product_id* - a reference to product model
 * belong_to: *colour* - in case there are many colour options in a related product
 * *amount* - quantity of the item
+* *reserve* - quantity of the item is reserve
 * *price* - the price of the item
-* *reserve* - amount of reserved items
-* *in_price* - the purchasing price of the item (to calculate a margin)  
+* *in_price* - the purchasing price of the item (to calculate a margin)  reserve
+
+* **method**: *available* => (amount - reserve) - instance method
+* **method**: *put_to_reserve* - increase reserve count, check that reserve is not bigger than amount 
 
 #### Window/Shelf
 Products on the shopping window

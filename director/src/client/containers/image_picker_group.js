@@ -18,6 +18,18 @@ const labelStyle = error => ({
   marginTop: '1rem',
 });
 
+const containerStyle = {
+  display: 'flex',
+  flexFlow: 'row wrap',
+  justifyContent: 'space-around',
+};
+
+const itemStyle = {
+  padding: '1rem',
+  textAlign: 'center',
+  width: '15rem',
+};
+
 const ImagePickerGroup = ({
   images,
   onImageChange,
@@ -26,26 +38,18 @@ const ImagePickerGroup = ({
 }) => (
   <Grid style={gridStyle(error)}>
     <div style={labelStyle(error)}>Pictures</div>
-    {Array.from({ length: count / 2 }).map((el, index) => (
-      <Grid.Row>
-        <Grid.Column width={4}>
+    <div style={containerStyle}>
+      {Array.from({ length: count }).map((el, index) => (
+        <div style={itemStyle}>
           <ImagePicker
             key={index * 10}
-            image={images[2 * index]}
-            onImageChange={img => onImageChange(img, 2 * index)}
-            id={2 * index}
+            image={images[index]}
+            onImageChange={img => onImageChange(img, index)}
+            id={index * 10}
           />
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <ImagePicker
-            key={index * 10 + 1}
-            image={images[2 * index + 1]}
-            onImageChange={img => onImageChange(img, 2 * index + 1)}
-            id={index * 10 + 1}
-          />
-        </Grid.Column>
-      </Grid.Row>
-    ))}
+        </div>
+      ))}
+    </div>
   </Grid>
 );
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Card, Icon, Image } from 'semantic-ui-react';
 
 const addStyle = {
-  fontSize: '10rem',
+  fontSize: '7rem',
   fontWeight: '800',
   color: 'rgba(0,0,0,.3)',
   height: '8rem',

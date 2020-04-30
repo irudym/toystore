@@ -91,4 +91,21 @@ class Product < ManagingRecord
     end
   end
 
+  def self.search(params)
+    products = []
+    if params[:name]
+      # TODO: need to check params[:brand] and params[:category]
+      products = Product.where("name LIKE :search", search: "%#{params[:name]}%")
+    elsif params[:category] && params[:brand]
+      brand = params[:brand]
+      category = params[:category]
+      if category == "-1" && brand == "-1" 
+        products = Product.available
+      else
+        products = Product.where(category_id: category, brand_id: brand)
+      end
+    end
+    products
+  end
+
 end

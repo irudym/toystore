@@ -7,6 +7,7 @@ import Colours from './api/colours';
 import Categories from './api/categories';
 import Materials from './api/materials';
 import Records from './api/records';
+import Products from './api/products';
 
 export const loginUser = async ({ url, user }) => {
   const response = await fetch(`${url}/auth/login`, {
@@ -29,4 +30,4 @@ export const categories = Categories;
 export const materials = Materials;
 export const brands = Records('brands');
 export const types = Records('types');
-export const products = Records('products');
+export const products = Products;

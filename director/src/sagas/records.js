@@ -69,8 +69,6 @@ export default function Records(model) {
 
     * create(action) {
       try {
-        console.log('SAGA create: ', action);
-        
         const data = yield call(API[`${model}`].create, action.payload);
         yield put({
           type: CREATE_ACTION_TYPE('add', model),
@@ -90,11 +88,10 @@ export default function Records(model) {
 
     * update(action) {
       try {
-        yield call(API[`${model}`].update, action.payload);
-
+        const data = yield call(API[`${model}`].update, action.payload);
         yield put({
           type: CREATE_ACTION_TYPE('change', model),
-          payload: action.payload,
+          payload: data ? { record: data } : action.payload, // in case there is a response from update call, use the returned data
         });
       } catch (error) {
         yield put({

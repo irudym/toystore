@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_19_201804) do
+ActiveRecord::Schema.define(version: 2019_03_07_161311) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -89,6 +89,19 @@ ActiveRecord::Schema.define(version: 2019_02_19_201804) do
     t.index ["product_id"], name: "index_images_products_on_product_id"
   end
 
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "colour_id"
+    t.integer "amount"
+    t.float "price"
+    t.boolean "trash", default: false
+    t.float "in_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["colour_id"], name: "index_items_on_colour_id"
+    t.index ["product_id"], name: "index_items_on_product_id"
+  end
+
   create_table "materials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "name"
     t.string "name_eng"
@@ -145,6 +158,8 @@ ActiveRecord::Schema.define(version: 2019_02_19_201804) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admins", "users"
+  add_foreign_key "items", "colours"
+  add_foreign_key "items", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
 end

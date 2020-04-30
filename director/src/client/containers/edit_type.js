@@ -83,7 +83,7 @@ class EditType extends React.Component {
 
   handleNameChange = e => this.setState({ name: e.target.value });
 
-  handleNameEngChange = e => this.setState({ nameEng: e.target.value });
+  handleNameEngChange = e => this.setState({ name_eng: e.target.value });
 
   handleDescriptionChange = e => this.setState({ description: e.target.value });
 

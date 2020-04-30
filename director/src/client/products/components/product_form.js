@@ -8,11 +8,19 @@ import {
   Label,
 } from 'semantic-ui-react';
 
-import ModalView from '../../components/views/modal_view';
+// import ModalView from '../../components/views/modal_view';
 import ColourDropdown from '../../components/colour_dropdown';
+import ImagePickerGroup from '../../containers/image_picker_group';
+
+const labelStyle = error => ({
+  fontSize: '.92857143em',
+  fontWeight: 700,
+  color: error ? '#9f3a38' : 'black',
+  padding: 0,
+  margin: '0 0 .28571429rem 0',
+});
 
 
-// TODO: Add product card preview as second column
 const ProductForm = ({
   onNameChange,
   onNameEngChange,
@@ -30,6 +38,8 @@ const ProductForm = ({
   onMaterialsChange,
   colours,
   onColoursChange,
+  onImageChange,
+  pictures,
 }) => (
   <Form>
     <Form.Input
@@ -53,8 +63,8 @@ const ProductForm = ({
       error={errors.Description !== undefined}
       value={product.description}
     />
-    <Form.Group inline>
-      <Label>Brand</Label>
+    <Form.Group style={{ display: 'block', margin: '0 0 1em' }}>
+      <div style={labelStyle(errors.Brand !== undefined)}>Brand</div>
       <Dropdown
         placeholder="Select brand"
         fluid
@@ -64,10 +74,11 @@ const ProductForm = ({
         onChange={onBrandChange}
         defaultValue={product.brand}
         loading={optionLoading.brand}
+        error={errors.Brand !== undefined}
       />
     </Form.Group>
-    <Form.Group inline>
-      <Label>Category</Label>
+    <Form.Group style={{ display: 'block', margin: '0 0 1em' }}>
+      <div style={labelStyle(errors.Category !== undefined)}>Category</div>
       <Dropdown
         placeholder="Select category"
         fluid
@@ -77,10 +88,11 @@ const ProductForm = ({
         onChange={onCategoryChange}
         defaultValue={product.category}
         loading={optionLoading.category}
+        error={errors.Category !== undefined}
       />
     </Form.Group>
-    <Form.Group inline>
-      <Label>Types</Label>
+    <Form.Group style={{ display: 'block', margin: '0 0 1em' }}>
+      <div style={labelStyle(errors.Types !== undefined)}>Types</div>
       <Dropdown
         placeholder="Select category"
         fluid
@@ -93,8 +105,8 @@ const ProductForm = ({
         loading={optionLoading.types}
       />
     </Form.Group>
-    <Form.Group inline>
-      <Label>Materials</Label>
+    <Form.Group style={{ display: 'block', margin: '0 0 1em' }}>
+      <div style={labelStyle(errors.Materials !== undefined)}>Materials</div>
       <Dropdown
         placeholder="Select category"
         fluid
@@ -107,7 +119,8 @@ const ProductForm = ({
         loading={optionLoading.materials}
       />
     </Form.Group>
-    <ColourDropdown loading={optionLoading.colours} options={colours} onChange={onColoursChange} />
+    <ColourDropdown defaultValue={product.colours} loading={optionLoading.colours} options={colours} onChange={onColoursChange} error={errors.Colours !== undefined} />
+    <ImagePickerGroup onImageChange={onImageChange} images={pictures} error={errors.Pictures !== undefined} />
   </Form>
 );
 
@@ -121,17 +134,15 @@ ProductForm.propTypes = {
   onTypesChange: PropTypes.func.isRequired,
   onMaterialsChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  product: PropTypes.object,
+  product: PropTypes.object.isRequired,
   optionLoading: PropTypes.object.isRequired,
   brands: PropTypes.arrayOf(PropTypes.object).isRequired,
   colours: PropTypes.arrayOf(PropTypes.object).isRequired,
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   types: PropTypes.arrayOf(PropTypes.object).isRequired,
   materials: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-ProductForm.defaultProps = {
-  product: {},
+  onImageChange: PropTypes.func.isRequired,
+  pictures: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ProductForm;

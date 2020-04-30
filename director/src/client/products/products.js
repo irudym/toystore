@@ -29,10 +29,10 @@ class Products extends React.Component {
       Component: RecordsHolder.Text,
     },
     {
-      name: 'category',
+      name: record => (record.category.name),
       title: 'Category',
       Component: RecordsHolder.Text,
-    },
+    }, 
   ];
 
   componentDidMount() {

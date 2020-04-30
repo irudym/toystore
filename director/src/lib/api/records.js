@@ -113,7 +113,11 @@ export default function Records(modelName) {
       if (!response.ok) {
         throw constructError(response, response);
       }
-      return {};
+      if (response.status === 202) {
+        const data = await response.json();
+        return data;
+      }
+      return null;
     },
 
     destroy: async ({ url, token, id }) => {

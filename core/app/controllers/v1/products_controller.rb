@@ -26,7 +26,7 @@ class V1::ProductsController < ApplicationController
       json_response({ message: "Cannot update the product without a picture" }, :unprocessable_entity)
     else
       @product.update(product_params)
-      head :no_content
+      render :show, status: 202
     end
   end
 
@@ -49,6 +49,11 @@ class V1::ProductsController < ApplicationController
   def info
     @available = Product.available.count
     @trash = Product.trash_bin.count
+  end
+
+  # search products
+  def search
+    @products = Product.search(params)
   end
 
 

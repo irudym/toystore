@@ -40,7 +40,7 @@ Due to TrashBin support it recommended to use method **available** to get all av
 
 #### Image support
 
-Due to very hard coded ActiveStorage attachment implementation wrapper Image created. Image supports setting attachment from base64 string which simplify image file uploading and storing. Other models should handle :picture/pictures in params to set linked Image. 
+Due to very hard coded ActiveStorage attachment implementation a wrapper Image created. Image supports setting attachment from base64 string which simplifies image file uploading and storing. Other models should handle :picture/pictures in params to set linked Image. 
 
 
 ### Workaround

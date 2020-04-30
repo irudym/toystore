@@ -4,7 +4,10 @@ json.name_eng @product.name_eng
 json.description @product.description
 json.created_at @product.created_at
 json.brand @product.brand.id
-json.category @product.category.id
+json.category do 
+  json.id @product.category.id
+  json.name @product.category.name
+end
 json.types do
   json.array!(@product.to_ids(:types))
 end

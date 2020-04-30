@@ -8,6 +8,7 @@ import MaterialSwitch from './material_switch';
 import BrandSwitch from './brand_switch';
 import TypeSwitch from './type_switch';
 import ProductSwitch from './product_switch';
+import Stock from '../client/stock/stock';
 
 
 export const Routes = () => (
@@ -20,6 +21,7 @@ export const Routes = () => (
     <Route path="/director/brands" component={BrandSwitch} />
     <Route path="/director/types" component={TypeSwitch} />
     <Route path="/director/products" component={ProductSwitch} />
+    <Route path="/director/stock" component={Stock} />
   </>
 );
 

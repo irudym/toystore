@@ -90,7 +90,7 @@ class EditProduct extends React.Component {
     if (nextProps.products.current && nextProps.products.current.id !== prevState.record.id) {
       console.log('NEW EDIT CATEGORY PROPS: ', nextProps);
       return ({
-        record: { ...nextProps.products.current },
+        record: { ...nextProps.products.current, category: nextProps.products.current.category ? nextProps.products.current.category.id : null },
         loading: false,
       });
     }
@@ -102,7 +102,7 @@ class EditProduct extends React.Component {
     const { history, setProduct } = this.props;
 
     // clear Redux state record of the current Material
-    setProduct({ name: '', name_eng: '', description: '', id: -1, pictures: null });
+    setProduct({ name: '', name_eng: '', description: '', id: -1, pictures: null, category: {id: null} });
     history.goBack();
   }
 

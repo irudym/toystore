@@ -78,7 +78,7 @@ class RecordsHolder extends React.Component {
                 }
                 {fields.map(field => (
                   <Table.Cell>
-                    <field.Component value={record[field.name]} />
+                    <field.Component value={typeof field.name === 'function' ? field.name(record) : record[field.name]} />
                   </Table.Cell>
                 ))}
                 <Table.Cell><DeleteIcon onDelete={() => onDelete(record.id)} /></Table.Cell>
